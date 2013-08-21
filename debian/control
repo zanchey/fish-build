@@ -1,0 +1,32 @@
+Source: fish
+Section: shells
+Priority: extra
+Maintainer: ridiculous_fish <corydoras@ridiculousfish.com>
+Uploaders: David Adam <zanchey@ucc.gu.uwa.edu.au>, Siteshwar Vashisht <siteshwar@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), libncurses5-dev, autoconf, doxygen, autotools-dev, dh-autoreconf, gettext
+Standards-Version: 3.9.1
+Homepage: http://fishshell.com/
+Vcs-Git: git://github.com/fish-shell/fish-shell.git
+Vcs-Browser: https://github.com/fish-shell/fish-shell
+
+Package: fish
+Architecture: any
+Conflicts: fish
+Depends: ${shlibs:Depends}, ${misc:Depends}, passwd (>= 4.0.3-10), libjs-jquery, bc, gettext-base
+Recommends: python (>=2.6), xsel (>=1.2.0)
+Description: friendly interactive shell
+ Fish is a command-line shell for modern systems, focusing on user-friendliness,
+ sensibility and discoverability in interactive use. The syntax is simple, but
+ not POSIX compliant.
+
+Package: fish-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends: fish (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for friendly interactive shell
+ Fish is a command-line shell for modern systems, focusing on user-friendliness,
+ sensibility and discoverability in interactive use. The syntax is simple, but
+ not POSIX compliant.
+ .
+ This package contains the debugging symbols for fish.
