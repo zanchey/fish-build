@@ -45,7 +45,7 @@ UPSTREAM_SHA=`git rev-parse --short origin/master`
 git checkout master
 git merge origin/master
 
-VERSION=`git describe --tags --dirty 2>/dev/null`
+VERSION=`git describe --dirty 2>/dev/null`
 MASTER_SHA=`git rev-parse --short master`
 RPMVERSION=`echo $VERSION |sed 's/-/+/
 s/-/./'`
