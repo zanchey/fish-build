@@ -17,7 +17,7 @@ DPKG_AREA=$BUILD_AREA/dpkgs
 OBS_AREA=$BUILD_AREA/obs
 
 # build for the following PPA architectures:
-PPA_SERIES=(precise quantal raring)
+PPA_SERIES=(precise quantal saucy trusty)
 # (zsh array - will not work in bash or sh)
 
 GPG_KEYID=0C273BBA
