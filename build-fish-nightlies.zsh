@@ -83,7 +83,7 @@ dch --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build f
 for series in $PPA_SERIES; do
 	sed -i "s/unstable/$series/g" debian/changelog
 	debuild -S -sa -k0C273BBA
-	dput fish-master-nightly ../fish_"$VERSION"-1~"$series"_source.changes
+	dput fish-nightly-master ../fish_"$VERSION"-1~"$series"_source.changes
 	sed -i "s/$series/unstable/g" debian/changelog
 done
 
@@ -94,7 +94,7 @@ done
 # do a source package for 'unstable', which gets uploaded to OBS, no dput
 debuild -S -sa -k0C273BBA
 
-cd $OBS_AREA/shells:fish:master-nightly/fish
+cd $OBS_AREA/shells:fish:nightly:master/fish
 
 # Sources and Debian control
 # clean up old files
