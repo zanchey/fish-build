@@ -72,3 +72,6 @@ fi
 
 # Support files
 %{_datadir}/fish/
+
+# pkgconfig
+%{_datadir}/pkgconfig/fish.pc
