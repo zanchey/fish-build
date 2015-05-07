@@ -1,3 +1,12 @@
+fish (2.2b1-1) testing; urgency=low
+
+  * Release of new beta version 2.2b1.
+
+  See http://fishshell.com/staging/release_notes.html for significant
+  changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Thu, 07 May 2015 14:48:21 +0800
+
 fish (2.1.1-1) unstable; urgency=high
 
   * Release of new version 2.1.1.
