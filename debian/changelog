@@ -1,3 +1,11 @@
+fish (2.1.1-1) unstable; urgency=high
+
+  * Release of new version 2.1.1.
+
+    See http://fishshell.com/release_notes.html for significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sun, 07 Sep 2014 17:06:31 +0800
+
 fish (2.1.0-1) unstable; urgency=low
 
   * Release of new version 2.1.0.
