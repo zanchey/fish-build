@@ -28,7 +28,6 @@ add_shell() {
 case "$1" in
     configure)
         add_shell
-	killall fishd || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

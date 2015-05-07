@@ -43,10 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 if ! grep %{_bindir}/fish %{_sysconfdir}/shells >/dev/null; then
 	echo %{_bindir}/fish >>%{_sysconfdir}/shells
 fi
-# Restart fishd if upgrading
-if [ "$1" -gt 1 ]; then
-	killall fishd
-fi
 
 %postun
 # Remove fish from the list of allowed shells in /etc/shells
