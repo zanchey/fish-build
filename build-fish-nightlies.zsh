@@ -92,7 +92,7 @@ done
 
 # still in $DPKG_AREA
 # do a source package for 'unstable', which gets uploaded to OBS, no dput
-debuild -S -sa -k0C273BBA
+debuild -S -sa -k0C273BBA -Zgzip
 
 cd $OBS_AREA/shells:fish:nightly:master/fish
 
