@@ -1,3 +1,135 @@
+fish (2.7.1-1) testing; urgency=medium
+
+  * Release of new bug fix version 2.7.1. On all Linux platforms, this is
+    release will behave identically to 2.7.0.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sat, 23 Dec 2017 00:43:12 +0800
+
+fish (2.7.0-1) testing; urgency=medium
+
+  * Release of new version 2.7.0.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.7.0 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Thu, 23 Nov 2017 18:38:21 +0800
+
+fish (2.7.1-1) testing; urgency=medium
+
+  * Release of new beta version 2.7b1.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.7b1 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Tue, 31 Oct 2017 20:32:29 +0800
+
+fish (2.6.0-1) testing; urgency=medium
+
+  * Relase of new version 2.6.0.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.6.0 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sat, 03 Jun 2017 20:51:50 +0800
+
+fish (2.6b1-1) testing; urgency=medium
+
+  * Release of new beta version 2.6b1.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.6b1 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sun, 14 May 2017 10:47:39 +0800
+
+fish (2.5.0-1) testing; urgency=medium
+
+  * Release of new version 2.5.0.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.5.0 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Fri, 03 Feb 2017 09:52:57 +0800
+
+fish (2.5b1-1) testing; urgency=medium
+
+  * Release of new beta version 2.5b1.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.5b1 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sat, 14 Jan 2017 08:49:34 +0800
+
+fish (2.4.0-2) testing; urgency=medium
+
+  * Change recommendation of xdg-utils to suggestion (closes
+    https://github.com/fish-shell/fish-shell/issues/3534).
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Wed, 09 Nov 2016 22:56:16 +0800
+
+fish (2.4.0-1) testing; urgency=medium
+
+  * Release of new version 2.4.0.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.4.0 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Tue, 08 Nov 2016 11:29:57 +0800
+
+fish (2.4b1-1) testing; urgency=medium
+
+  * Release of new beta version 2.4b1.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.4b1 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Tue, 18 Oct 2016 22:25:26 +0800
+
+fish (2.3.1-1) testing; urgency=medium
+
+  * Release of new version 2.3.1.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sun, 03 Jul 2016 21:21:51 +0800
+
+fish (2.3.0-1) testing; urgency=medium
+
+  * Release of new version 2.3.0.
+
+  See http://fishshell.com/release_notes.html for significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sat, 21 May 2016 06:59:54 +0800
+
+fish (2.3b2-1) testing; urgency=medium
+
+  * Release of new beta version 2.3b2.
+
+  See https://github.com/fish-shell/fish-shell/releases/tag/2.3b2 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Thu, 05 May 2016 06:22:37 +0800
+
+fish (2.3.1-1) testing; urgency=medium
+
+  * Release of new beta version 2.3b1.
+
+  See http://github.com/fish-shell/fish-shell/releases/tag/2.3b1 for
+  significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Tue, 19 Apr 2016 21:07:17 +0800
+
+fish (2.2.0-2) testing; urgency=medium
+
+  * Binary rebuild only to resynchronise repository state.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Mon, 15 Feb 2016 22:45:05 +0800
+
+fish (2.2.0-1) testing; urgency=medium
+
+  * Release of new version 2.2.0.
+
+    See http://fishshell.com/release_notes.html for significant changes.
+
+ -- David Adam <zanchey@ucc.gu.uwa.edu.au>  Sun, 12 Jul 2015 18:52:29 +0800
+
 fish (2.2b1-1) testing; urgency=low
 
   * Release of new beta version 2.2b1.
