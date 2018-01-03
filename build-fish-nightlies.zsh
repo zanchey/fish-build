@@ -17,7 +17,7 @@ DPKG_AREA=$BUILD_AREA/dpkgs
 OBS_AREA=$BUILD_AREA/obs
 
 # build for the following PPA architectures:
-PPA_SERIES=(precise trusty vivid wily xenial)
+PPA_SERIES=(trusty xenial zesty artful)
 # (zsh array - will not work in bash or sh)
 
 GPG_KEYID=0C273BBA
@@ -76,7 +76,8 @@ tar xzvf $DPKG_ORIG_ARCHIVE
 # git-buildpackage, but the workflow is fairly inflexible and there is lots of
 # gaps in the documentation.
 cd fish-$VERSION
-cp -r $FISH_BUILDSRCDIR/debian debian
+cp -r $FISH_SRCDIR/debian debian
+cp $FISH_BUILDSRCDIR/debian/changelog debian/changelog
 dch --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build from $MASTER_SHA"
 
 # build and upload the packages
@@ -106,7 +107,7 @@ ln -s $DPKG_AREA/fish_"$VERSION"-1~unstable.debian.tar.gz .
 
 # Spec file for RPM
 sed "s/@VERSION@/$VERSION/
-s/@RPMVERSION@/$RPMVERSION/" < $FISH_BUILDSRCDIR/fish.spec.in > fish.spec
+s/@RPMVERSION@/$RPMVERSION/" < $FISH_SRCDIR/fish.spec.in > fish.spec
 osc addremove
 
 # Commit changes
