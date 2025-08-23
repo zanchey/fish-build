@@ -17,10 +17,18 @@ DPKG_AREA=$BUILD_AREA/dpkgs
 OBS_AREA=$BUILD_AREA/obs
 
 # build for the following PPA architectures:
-PPA_SERIES=(trusty xenial zesty artful)
+PPA_SERIES=(
+$(python3 <<EOF
+from launchpadlib.launchpad import Launchpad
+launchpad = Launchpad.login_anonymously('fish shell build script', 'production', '~/.cache', version='devel')
+ubu = launchpad.projects('ubuntu')
+print('\n'.join(x['name'] for x in ubu.series.entries if x['supported'] == True))
+EOF
+ )
+)
 # (zsh array - will not work in bash or sh)
 
-GPG_KEYID=0C273BBA
+GPG_KEYID=3E03B4E97C71CD1C0E94B287FCA50E480C273BBA
 
 ###################
 # Set up
@@ -53,19 +61,32 @@ s/-/./'`
 # build archive
 build_tools/make_tarball.sh
 
-ARCHIVE=$BUILD_AREA/fish-$VERSION.tar.gz
+ARCHIVE=$BUILD_AREA/fish-$VERSION.tar.xz
+
+# build vendor archive
+build_tools/make_vendor_tarball.sh
+
+VENDOR_ARCHIVE=$BUILD_AREA/fish-$VERSION-vendor.tar.xz
 
 ###################
 # Debian package build
 
 # make 'orig' tarball appear
-DPKG_ORIG_ARCHIVE=$DPKG_AREA/fish_$VERSION.orig.tar.gz
-rm -f $DPKG_ORIG_ARCHIVE
+DPKG_ORIG_ARCHIVE=$DPKG_AREA/fish_$VERSION.orig.tar.xz
+DPKG_ORIG_VENDOR_ARCHIVE=$DPKG_AREA/fish_$VERSION.orig-cargo-vendor.tar.xz
+rm -f $DPKG_ORIG_ARCHIVE $DPKG_ORIG_VENDOR_ARCHIVE
 ln -s $ARCHIVE $DPKG_ORIG_ARCHIVE
+ln -s $VENDOR_ARCHIVE $DPKG_ORIG_VENDOR_ARCHIVE
 
 # unpack it
 cd $DPKG_AREA
-tar xzvf $DPKG_ORIG_ARCHIVE
+tar xf $DPKG_ORIG_ARCHIVE
+
+cd fish-$VERSION
+mkdir cargo-vendor
+cd cargo-vendor
+tar xf $DPKG_ORIG_VENDOR_ARCHIVE
+cd ..
 
 # add debian packaging information
 # this is copied in from the git repo
@@ -75,15 +96,14 @@ tar xzvf $DPKG_ORIG_ARCHIVE
 # a 'better' way might be to have the whole thing in git with something like
 # git-buildpackage, but the workflow is fairly inflexible and there is lots of
 # gaps in the documentation.
-cd fish-$VERSION
 cp -r $FISH_SRCDIR/debian debian
-cp $FISH_BUILDSRCDIR/debian/changelog debian/changelog
-dch --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build from $MASTER_SHA"
+dch --create --package fish --empty --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build from $MASTER_SHA"
 
 # build and upload the packages
+# lintian takes 10 minutes to run with the vendor tarballs included
 for series in $PPA_SERIES; do
 	sed -i "s/unstable/$series/g" debian/changelog
-	debuild -S -sa -k0C273BBA
+	debuild --no-lintian -S -sa -k$GPG_KEYID -d
 	dput fish-nightly-master ../fish_"$VERSION"-1~"$series"_source.changes
 	sed -i "s/$series/unstable/g" debian/changelog
 done
@@ -93,17 +113,19 @@ done
 
 # still in $DPKG_AREA
 # do a source package for 'unstable', which gets uploaded to OBS, no dput
-debuild -S -sa -k0C273BBA -Zgzip
+debuild --no-lintian -S -sa -k$GPG_KEYID -d
 
 cd $OBS_AREA/shells:fish:nightly:master/fish
+osc up
 
 # Sources and Debian control
 # clean up old files
-OBSOLETE=`find . -maxdepth 1 -name fish_\*.orig.tar.gz -o -name fish_\*.debian.tar.gz -o -name fish_\*.dsc`
+OBSOLETE=`find . -maxdepth 1 -name fish_\*.orig\*.tar.\?z -o -name fish_\*.debian.tar.\?z -o -name fish_\*.dsc`
 [ -n "$OBSOLETE" ] && echo $OBSOLETE | xargs rm
 ln -s $DPKG_ORIG_ARCHIVE .
+ln -s $DPKG_ORIG_VENDOR_ARCHIVE .
 ln -s $DPKG_AREA/fish_"$VERSION"-1~unstable.dsc .
-ln -s $DPKG_AREA/fish_"$VERSION"-1~unstable.debian.tar.gz .
+ln -s $DPKG_AREA/fish_"$VERSION"-1~unstable.debian.tar.xz .
 
 # Spec file for RPM
 sed "s/@VERSION@/$VERSION/
@@ -117,4 +139,3 @@ osc commit -m "Snapshot build from $MASTER_SHA"
 # removes the source tree but leaves the uploaded files behind
 cd $DPKG_AREA
 rm -rf ./fish-$VERSION
-
