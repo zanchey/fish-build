@@ -18,13 +18,7 @@ OBS_AREA=$BUILD_AREA/obs
 
 # build for the following PPA architectures:
 PPA_SERIES=(
-$(python3 <<EOF
-from launchpadlib.launchpad import Launchpad
-launchpad = Launchpad.login_anonymously('fish shell build script', 'production', '~/.cache', version='devel')
-ubu = launchpad.projects('ubuntu')
-print('\n'.join(x['name'] for x in ubu.series.entries if x['supported'] == True))
-EOF
- )
+$(uv run --script $FISH_SRCDIR/build_tools/supported_ubuntu_versions.py)
 )
 # (zsh array - will not work in bash or sh)
 
@@ -89,15 +83,11 @@ tar xf $DPKG_ORIG_VENDOR_ARCHIVE
 cd ..
 
 # add debian packaging information
-# this is copied in from the git repo
 # the changes we make are thrown away - that is, not present in future builds
 # this is ok for snapshots but not so much for releases. it might confuse
 # apt-listchanges and other tools.
-# a 'better' way might be to have the whole thing in git with something like
-# git-buildpackage, but the workflow is fairly inflexible and there is lots of
-# gaps in the documentation.
-cp -r $FISH_SRCDIR/debian debian
-dch --create --package fish --empty --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build from $MASTER_SHA"
+cp -r contrib/debian debian
+dch --newversion "$VERSION-1~unstable" --distribution unstable "Snapshot build from $MASTER_SHA"
 
 # build and upload the packages
 # lintian takes 10 minutes to run with the vendor tarballs included
